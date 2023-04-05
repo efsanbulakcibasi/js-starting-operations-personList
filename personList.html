@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Person Lİst</title>
+    <link rel="stylesheet" href="./personList.css">
+</head>
+<body>
+    <div class="section">
+        <div class="c-wrapper">
+            <div class="js-personList">
+                <div class="person-List">
+                    <h3>Not: <span> Kodları görüntülemek için bir, kapatmak için iki defa tıklayınız</span></h3>
+                    <button class="pList-butn" onclick="showList()" ondblclick="closeList()">Kişi Listesi</button>
+                    <div id="list-container" class="pList-contents">
+                        const persons = [
+                        {
+                          name: "Sıla",
+                          lastName: "Kaya",
+                          income: 15000,
+                          age: 15,
+                          children: [{ name: "Ahmet", lastName: "Kaya" }],
+                        },
+                        {
+                          name: "Efşan",
+                          lastName: "bbasi",
+                          income: 5000,
+                          age: 20,
+                          children: [
+                            { name: "Aden", lastName: "bbasi" },
+                            { name: "Yiğit", lastName: "bbasi" },
+                          ],
+                        },
+                        { name: "Ece", lastName: "Küley", income: 0, age: 12, children: [] },
+                        {
+                          name: "Emrah",
+                          lastName: "Akıntürk",
+                          income: 35000,
+                          age: 50,
+                          children: [{ name: "Nazlı", lastName: "Akıntürk" }],
+                        },
+                        { name: "Ülkü", lastName: "bbasi", income: 0, age: 25, children: [] },
+                      ];
+                    </div>
+                </div>
+                <div class="a-item">
+                    <p class="a-item-01">1-Kişi listesi oluşturalım kişileri listeleyelim</p>
+                    <p class="a-item-02" id="personList"></p>
+                    <div class="a-item-03">
+                        <button class="a-item-03-A" onclick="showCode(0)" ondblclick="closeCode(0)">Show Codes</button>
+                        <div class="a-item-03-B">
+                            document.getElementById("personList").innerText = persons.map((x) => x.name).join(" , ");
+                        </div>
+                    </div>
+                </div>
+                  <div class="a-item">
+                    <p class="a-item-01">2-kişi listesine kişi ekleyelim kişileri listeleyelim</p>
+                    <p class="a-item-02"  id="personListAdd"></p>
+                    <div class="a-item-03">
+                        <button class="a-item-03-A" onclick="showCode(1)" ondblclick="closeCode(1)">Show Codes</button>
+                        <div class="a-item-03-B" >
+                            persons.push(
+                                {
+                                  name: "Aleyna",
+                                  lastName: "Çolak",
+                                  income: 15000,
+                                  age: 15,
+                                  children: [{ name: "Su", lastName: "Çolak" }],
+                                }
+                              )
+                              document.getElementById("personListAdd").innerText= persons.map((x) => x.name).join(" , ");
+                        </div>
+                    </div>
+                  </div>
+                  <div class="a-item">
+                    <p class="a-item-01">3-son eklenen kişiyi silelim kişileri listeleyelim</p>
+                    <p class="a-item-02"  id="personListRemove"></p>
+                    <div class="a-item-03">
+                        <button class="a-item-03-A" onclick="showCode(2)" ondblclick="closeCode(2)">Show Codes</button>
+                        <div class="a-item-03-B">
+                            persons.pop();
+                            document.getElementById("personListRemove").innerText=persons.map((x) => x.name).join(" , ");
+                        </div>
+                    </div>
+                  </div>
+                  <div class="a-item">
+                    <p class="a-item-01">4-En yaşlı kişinin adını yazdıralım</p>
+                    <p class="a-item-02"  id="oldPersonName"></p>
+                    <div class="a-item-03">
+                        <button class="a-item-03-A" onclick="showCode(3)" ondblclick="closeCode(3)">Show Codes</button>
+                        <div class="a-item-03-B">
+                            // Adım 1: 
+                            persons.sort((a,b) => a.age- b.age);
+                            // Adım 2:
+                            //en son kişiyi almak için uzunluk eksi bir yaptık
+                            let oldPerson = persons[persons.length -1];
+                            document.getElementById("oldPersonName").innerText=oldPerson.name;
+                        </div>
+                    </div>
+                  </div>
+                  <div class="a-item">
+                    <p class="a-item-01">5-en genç kişi adını yazdıralım</p>
+                    <p class="a-item-02"  id="youngPersonName"></p>
+                    <div class="a-item-03">
+                        <button class="a-item-03-A" onclick="showCode(4)" ondblclick="closeCode(4)">Show Codes</button>
+                        <div class="a-item-03-B" >
+                            persons.sort((a,b) => a.age - b.age)
+                            let youngPerson = persons[0];
+                            document.getElementById("youngPersonName").innerText= youngPerson.name;
+                        </div>
+                    </div>
+                  </div>
+                  <div class="a-item">
+                    <p class="a-item-01">6-yaşı 18den büyükler listesini yazdıralım</p>
+                    <p class="a-item-02"  id="over18List"></p>
+                    <div class="a-item-03">
+                        <button class="a-item-03-A" onclick="showCode(5)" ondblclick="closeCode(5)">Show Codes</button>
+                        <div class="a-item-03-B" >
+                            let underageList = persons.filter((x) => x.age >18);
+                            document.getElementById("over18List").innerText = underageList.map((x) => x.name).join(" , ");
+                        </div>
+                    </div>
+                  </div>
+                  <div class="a-item">
+                    <p class="a-item-01">7-adında a harfi olanlar listesini yazdıralım</p>
+                    <p class="a-item-02"  id="inculedAParamList"></p>
+                    <div class="a-item-03">
+                        <button class="a-item-03-A" onclick="showCode(6)" ondblclick="closeCode(6)">Show Codes</button>
+                        <div class="a-item-03-B" >
+                            let existingA = persons.filter((x) => x.name.toLocaleLowerCase().includes("a"));
+                            document.getElementById("inculedAParamList").innerText= existingA.map((x) => x.name).join(" , ");
+                        </div>
+                    </div>
+                  </div>
+                  <div class="a-item">
+                    <p class="a-item-01">8-geliri 25000 üzeri olanlar listesini yazdıralım</p>
+                    <p class="a-item-02"  id="over25000Income"></p>
+                    <div class="a-item-03">
+                        <button class="a-item-03-A" onclick="showCode(7)" ondblclick="closeCode(7)">Show Codes</button>
+                        <div class="a-item-03-B" >
+                            let incomeHige25K= persons.filter((x) => x.income > 25000);
+                            document.getElementById("over25000Income").innerText= incomeHige25K.map((x) => x.name).join(" , ");
+                        </div>
+                    </div>
+                  </div>
+                  <div class="a-item">
+                    <p class="a-item-01">9-çocuğu olan kişi varmı?</p>
+                    <p class="a-item-02"  id="hasChildPerson"></p>
+                    <div class="a-item-03">
+                        <button class="a-item-03-A" onclick="showCode(8)" ondblclick="closeCode(8)">Show Codes</button>
+                        <div class="a-item-03-B" >
+                            let haveChilderen = persons.filter((x) => x.children.length >0);
+                            document.getElementById("hasChildPerson").innerText= haveChilderen ? "Evet var." : "Hayır yok";
+                        </div>
+                    </div>
+                  </div>
+                  <div class="a-item">
+                    <p class="a-item-01">10-çocuğu olmayan kişi varmı?</p>
+                    <p class="a-item-02"  id="hasNoChildPerson"></p>
+                    <div class="a-item-03">
+                        <button class="a-item-03-A" onclick="showCode(9)" ondblclick="closeCode(9)">Show Codes</button>
+                        <div class="a-item-03-B" >
+                            let havenTChilderen = persons.filter((x) => x.children.length = 0);
+                            document.getElementById("hasNoChildPerson").innerText = haveChilderen ? "Çocuğu olmayan kişi var" : "Hayır, herkesin çocuğu var";
+                        </div>
+                    </div>
+                  </div>
+                  <div class="a-item">
+                    <p class="a-item-01">11-kişileri ad sırasına göre listeleyelim</p>
+                    <p class="a-item-02"  id="sortByNameList"></p>
+                    <div class="a-item-03">
+                        <button class="a-item-03-A" onclick="showCode(10)" ondblclick="closeCode(10)">Show Codes</button>
+                        <div class="a-item-03-B" >
+                            let sortedNameList = persons.sort((a,b) => (a.name > b.name) ? 1 : (b.name > a.name) ? -1 : 0);
+                            document.getElementById("sortByNameList").innerText = sortedNameList.map((x) => x.name).join(" , ");
+                        </div>
+                    </div>
+                  </div>
+                  <div class="a-item">
+                    <p class="a-item-01">12-kişileri en yüksek gelirden düşük gelire doğru listeleyelim</p>
+                    <p class="a-item-02"  id="sortByIncomeList"></p>
+                    <div class="a-item-03">
+                        <button class="a-item-03-A" onclick="showCode(11)" ondblclick="closeCode(11)">Show Codes</button>
+                        <div class="a-item-03-B">
+                            let sortIcome = persons.sort((a,b) => b.income- a.income)
+                            document.getElementById("sortByIncomeList").innerText = sortIcome.map((x) => x.name).join(" , ");
+                        </div>
+                    </div>
+                  </div>
+              
+                  <div class="a-item">
+                    <p class="a-item-01">13- en yüksek geliri olan kişiyi silelim sonra kişileri listeyelim</p>
+                    <p class="a-item-02"  id="removeHighIncome1"></p>
+                    <div class="a-item-03">
+                        <button class="a-item-03-A" onclick="showCode(12)" ondblclick="closeCode(12)">Show Codes</button>
+                        <div class="a-item-03-B">
+                            let sortIncomeHPerson = persons.sort((a,b) => a.income -b.income);
+                            sortIncomeHPerson.pop()
+                            document.getElementById("removeHighIncome1").innerText = sortIncomeHPerson.map((x) => x.name).join(" , ")
+                        </div>
+                    </div>
+                  </div>
+              
+                  <div class="a-item">
+                    <p class="a-item-01">14-tüm kişilerin yaşına +1 ekleyelim</p>
+                    <p class="a-item-02"  id="add1"></p>
+                    <div class="a-item-03">
+                        <button class="a-item-03-A" onclick="showCode(13)" ondblclick="closeCode(13)">Show Codes</button>
+                        <div class="a-item-03-B">
+                            <!-- //1. yol
+                            //let personsAge= persons.map((x) => x.age +1);
+                            //document.getElementById("add1").innerText = personsAge
+                            //2.yol
+                            for(i=0; i<persons.length; i++){
+                              persons[i].age++;
+                            }
+                            document.getElementById("add1").innerText = persons.map((x) =>  x.age).join(" , "); -->
+                        </div>
+                    </div>
+                  </div>
+                  <div class="a-item">
+                    <p class="a-item-01">15. Soru: Geliri sıfır olmayanların gelirini %20 arttıralım</p>
+                    <p class="a-item-02"  id="arttır20"></p>
+                    <div class="a-item-03">
+                        <button class="a-item-03-A" onclick="showCode(14)" ondblclick="closeCode(14)">Show Codes</button>
+                        <div class="a-item-03-B">
+                            for(i=0; i < persons.length; i++){
+                                var personIcome = persons[i]
+                                personIcome.income = personIcome.income * 1.2
+                              }
+                              document.getElementById("arttır20").innerText = persons.map((x) => x.income).join(" , ");
+                        </div>
+                    </div>
+                  </div>
+                  <div class="a-item">
+                    <p class="a-item-01">16.Soru: Listenin ilk sırasına 5 çocuğu olan kişi ekleyelim</p>
+                    <p class="a-item-02"  id="addPerson"></p>
+                    <div class="a-item-03">
+                        <button class="a-item-03-A" onclick="showCode(15)" ondblclick="closeCode(15)">Show Codes</button>
+                        <div class="a-item-03-B" >
+                            persons.unshift({
+     
+                                name: "Adem",
+                                lastName: "Alakuş",
+                                income: 50000,
+                                age: 60,
+                                children: [
+                                  { name: "Beyza", lastName: "Alakuş" },
+                                  { name: "Miray", lastName: "Alakuş" },
+                                  { name: "İrem", lastName: "Alakuş" },
+                                  { name: "Emin", lastName: "Alakuş" },
+                                  { name: "Burak", lastName: "Alakuş" },
+                              ],
+                            })
+                            document.getElementById("addPerson").innerText = persons.map((x) => x.name).join(" , ")
+                        </div>
+                    </div>
+                  </div>
+                  <div class="a-item">
+                    <p class="a-item-01">17.soru: tek çocuklu kişinin geliri %10, iki ve üç çocuklu kişinin geliri %20, 4 ve daha fazlasını %30 arttıralım</p>
+                    <p class="a-item-02"  id="multiadd"></p>
+                    <div class="a-item-03">
+                        <button class="a-item-03-A" onclick="showCode(16)" ondblclick="closeCode(16)">Show Codes</button>
+                        <div class="a-item-03-B" >
+                            const childrens = persons.filter((x) => x.children)
+                            for (let i = 0; i < persons.length; i++) {
+                              const personIcome = persons[i];
+                              if (childrens.length === 1) {
+                                  personIcome.income = personIcome.income  * 1.1
+                              }
+                              else if (childrens.length === 2 || childrens.length ===3) {
+                                  personIcome.income  = personIcome.income * 1.2
+                              }
+                              else if (childrens.length >= 4) {
+                                  personIcome.income  = personIcome.income  * 1.3
+                              }
+                            }
+                            document.getElementById("multiadd").innerText = persons.map((x) => x.income).join(" , ");
+                        </div>
+                    </div>
+                  </div>
+                  <div class="a-item">
+                    <p class="a-item-01">18. Soru: kişiyi adına göre bulup bir çocuk ekleme</p>
+                    <p class="a-item-02"  id="findNameAddInc"></p>
+                    <div class="a-item-03">
+                        <button class="a-item-03-A" onclick="showCode(17)" ondblclick="closeCode(17)">Show Codes</button>
+                        <div class="a-item-03-B" >
+                            const index = persons.findIndex((x) => x.name ==="Sıla");
+                            var addChilde = persons[index].children
+                            addChilde.push({
+                              name: "Devin", lastName: "Kaya"
+                            });
+                      
+                            document.getElementById("findNameAddInc").innerText = persons.map((x) => x.children.map((x) => x.name)).join(" , ");
+                        </div>
+                    </div>
+                  </div>
+                  <div class="a-item">
+                    <p class="a-item-01">19 soru: listedeki tüm kişilerin gelirini bulalım</p>
+                    <p class="a-item-02"  id="sortIncome"></p>
+                    <div class="a-item-03">
+                        <button class="a-item-03-A" onclick="showCode(18)" ondblclick="closeCode(18)">Show Codes</button>
+                        <div class="a-item-03-B" >
+                            var total =0;
+                            for (let i = 0; i < persons.length; i++) {
+                              const person =persons[i];
+                              total += person.income
+                            }
+                            document.getElementById("sortIncome").innerText = "Total Income:" +" "+ total;
+                        </div>
+                    </div>
+                  </div>
+                  <div class="a-item">
+                    <p class="a-item-01">20. Soru: tüm kişilerin gelirinin ortalamasını alalım</p>
+                    <p class="a-item-02"  id="avarage"></p>
+                    <div class="a-item-03">
+                        <button class="a-item-03-A" onclick="showCode(19)" ondblclick="closeCode(19)">Show Codes</button>
+                        <div class="a-item-03-B" >
+                            var average = total / persons.length
+                            document.getElementById("avarage").innerText = "Average Income:" + " " + average
+                        </div>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+    <script>
+         const persons = [
+        {
+          name: "Sıla",
+          lastName: "Kaya",
+          income: 15000,
+          age: 15,
+          children: [{ name: "Ahmet", lastName: "Kaya" }],
+        },
+        {
+          name: "Efşan",
+          lastName: "bbasi",
+          income: 5000,
+          age: 20,
+          children: [
+            { name: "Aden", lastName: "bbasi" },
+            { name: "Yiğit", lastName: "bbasi" },
+          ],
+        },
+        { name: "Ece", lastName: "Küley", income: 0, age: 12, children: [] },
+        {
+          name: "Emrah",
+          lastName: "Akıntürk",
+          income: 35000,
+          age: 50,
+          children: [{ name: "Nazlı", lastName: "Akıntürk" }],
+        },
+        { name: "Ülkü", lastName: "bbasi", income: 0, age: 25, children: [] },
+      ];
+
+      // 1-Kişi listesi oluşturalım kişileri listeleyelim
+      document.getElementById("personList").innerText = persons.map((x) => x.name).join(" , ");
+
+      //2-kişi listesine kişi ekleyelim kişileri listeleyelim
+      persons.push(
+        {
+          name: "Aleyna",
+          lastName: "Çolak",
+          income: 15000,
+          age: 15,
+          children: [{ name: "Su", lastName: "Çolak" }],
+        }
+      )
+      document.getElementById("personListAdd").innerText= persons.map((x) => x.name).join(" , ");
+
+      //3-son eklenen kişiyi silelim kişileri listeleyelim
+      persons.pop();
+      document.getElementById("personListRemove").innerText=persons.map((x) => x.name).join(" , ");
+
+      // 4-En yaşlı kişinin adını yazdıralım
+      // Adım 1: 
+      persons.sort((a,b) => a.age- b.age);
+      // Adım 2:
+      //en son kişiyi almak için uzunluk eksi bir yaptık
+      let oldPerson = persons[persons.length -1];
+      document.getElementById("oldPersonName").innerText=oldPerson.name;
+
+      //5-en genç kişi adını yazdıralım
+      persons.sort((a,b) => a.age - b.age)
+      let youngPerson = persons[0];
+      document.getElementById("youngPersonName").innerText= youngPerson.name;
+
+      //6-yaşı 18den büyükler listesini yazdıralım
+      let underageList = persons.filter((x) => x.age >18);
+      document.getElementById("over18List").innerText = underageList.map((x) => x.name).join(" , ");
+
+      //7-adında a harfi olanlar listesini yazdıralım
+      let existingA = persons.filter((x) => x.name.toLocaleLowerCase().includes("a"));
+      document.getElementById("inculedAParamList").innerText= existingA.map((x) => x.name).join(" , ");
+
+      //8-geliri 25000 üzeri olanlar listesini yazdıralım
+      let incomeHige25K= persons.filter((x) => x.income > 25000);
+      document.getElementById("over25000Income").innerText= incomeHige25K.map((x) => x.name).join(" , ");
+
+      //9-çocuğu olan kişi varmı? 
+      let haveChilderen = persons.filter((x) => x.children.length >0);
+      document.getElementById("hasChildPerson").innerText= haveChilderen ? "Evet var." : "Hayır yok";
+
+      //10-çocuğu olmayan kişi varmı?
+      let havenTChilderen = persons.filter((x) => x.children.length = 0);
+      document.getElementById("hasNoChildPerson").innerText = haveChilderen ? "Çocuğu olmayan kişi var" : "Hayır, herkesin çocuğu var";
+
+      //11-kişileri ad sırasına göre listeleyelim 
+      let sortedNameList = persons.sort((a,b) => (a.name > b.name) ? 1 : (b.name > a.name) ? -1 : 0);
+      document.getElementById("sortByNameList").innerText = sortedNameList.map((x) => x.name).join(" , ");
+
+      //12-kişileri en yüksek gelirden düşük gelire doğru listeleyelim
+      let sortIcome = persons.sort((a,b) => b.income- a.income)
+      document.getElementById("sortByIncomeList").innerText = sortIcome.map((x) => x.name).join(" , ");
+
+      //13- en yüksek geliri olan kişiyi silelim sonra kişileri listeyelim 
+      let sortIncomeHPerson = persons.sort((a,b) => a.income -b.income);
+      sortIncomeHPerson.pop()
+      document.getElementById("removeHighIncome1").innerText = sortIncomeHPerson.map((x) => x.name).join(" , ")
+
+      //14-tüm kişilerin yaşına +1 ekleyelim
+      //1. yol
+      //let personsAge= persons.map((x) => x.age +1);
+      //document.getElementById("add1").innerText = personsAge
+      //2.yol
+      for(i=0; i<persons.length; i++){
+        persons[i].age++;
+      }
+      document.getElementById("add1").innerText = persons.map((x) =>  x.age).join(" , ");
+
+      //15. Geliri sıfır olmayanların gelirini %20 arttıralım 
+      for(i=0; i< persons.length; i++){
+        var personIcome = persons[i]
+        personIcome.income = personIcome.income * 1.2
+      }
+      document.getElementById("arttır20").innerText = persons.map((x) => x.income).join(" , ");
+
+      //16.Soru: Listenin ilk sırasına 5 çocuğu olan kişi ekleyelim
+      persons.unshift({
+     
+          name: "Adem",
+          lastName: "Alakuş",
+          income: 50000,
+          age: 60,
+          children: [
+            { name: "Beyza", lastName: "Alakuş" },
+            { name: "Miray", lastName: "Alakuş" },
+            { name: "İrem", lastName: "Alakuş" },
+            { name: "Emin", lastName: "Alakuş" },
+            { name: "Burak", lastName: "Alakuş" },
+        ],
+      })
+      document.getElementById("addPerson").innerText = persons.map((x) => x.name).join(" , ")
+
+      //17.soru: tek çocuklu kişinin geliri %10, iki ve üç çocuklu kişinin geliri %20, 4 ve daha fazlasını %30 arttıralım
+      const childrens = persons.filter((x) => x.children)
+      for (let i = 0; i < persons.length; i++) {
+        const personIcome = persons[i];
+        if (childrens.length === 1) {
+            personIcome.income = personIcome.income  * 1.1
+        }
+        else if (childrens.length === 2 || childrens.length ===3) {
+            personIcome.income  = personIcome.income * 1.2
+        }
+        else if (childrens.length >= 4) {
+            personIcome.income  = personIcome.income  * 1.3
+        }
+      }
+      document.getElementById("multiadd").innerText = persons.map((x) => x.income).join(" , ");
+      //18. Soru: kişiyi adına göre bulup bir çocuk ekleme
+
+      const index = persons.findIndex((x) => x.name ==="Sıla");
+      var addChilde = persons[index].children
+      addChilde.push({
+        name: "Devin", lastName: "Kaya"
+      });
+
+      document.getElementById("findNameAddInc").innerText = persons.map((x) => x.children.map((x) => x.name)).join(" , ");
+
+      //19 soru: listedeki tüm kişilerin gelirini bulalım
+      var total =0;
+      for (let i = 0; i < persons.length; i++) {
+        const person =persons[i];
+        total += person.income
+      }
+      document.getElementById("sortIncome").innerText = "Total Income:" +" "+ total;
+      //20. Soru: tüm kişilerin gelirinin ortalamasını alalım
+      var average = total / persons.length
+      document.getElementById("avarage").innerText = "Average Income:" + " " + average
+
+      //personListi görüntülemek için
+      var personList = document.getElementById("list-container")
+      const showList = () => {
+        personList.style.display="block"
+      }
+      const closeList = () => {
+        personList.style.display="none"
+      }
+      //kodları görüntülemek için
+      var codesPage = document.querySelectorAll(".a-item-03-B")
+      const showCode = (index) =>{
+        codesPage[index].style.display="block";
+      }
+      const closeCode = (index) =>{
+        codesPage[index].style.display="none";
+      }
+    </script>
+</body>
+</html>
